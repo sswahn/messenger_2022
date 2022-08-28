@@ -22,9 +22,6 @@ export default () => {
     }
     
     //=================================================
-    
-    // try getting the node and if it has strong element
-    // use a condition to verify
     // still need to adjust range at some point
     
     const node = Array.from(textarea.childNodes).find(node => node.textContent === selection.toString())
