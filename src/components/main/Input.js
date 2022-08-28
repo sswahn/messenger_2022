@@ -6,8 +6,7 @@ import server from '../../utilities/Server'
 import cookie from '../../utilities/Cookies'
 import styles from './main.module.css'
 import Emoji from '../emoji/Emoji'
-import BoldButtonCreate from '../buttons/BoldButtonCreate'
-import BoldButtonRemove from '../buttons/BoldButtonRemove'
+import BoldButton from '../buttons/BoldButton'
 import ItalicButton from '../buttons/ItalicButton'
 import LinkButton from '../buttons/LinkButton'
 import MentionButton from '../buttons/MentionButton'
@@ -19,7 +18,6 @@ export default () => {
   const [context, dispatch] = useContext(Context)
   const [state, setState] = useState({ 
     stored_text: store.get('text') || '',
-    is_bold: true,
     emoji: false
   })
 
@@ -60,36 +58,6 @@ export default () => {
     event.keyCode === 13 && handleSubmit(event)
   }
 
-  const handleCreateBold = () => {
-    const selection = window.getSelection()
-    const range = selection.getRangeAt(0)
-    const fragment = range.cloneContents()
-    if (!fragment.firstChild) {
-      console.log('should only see this if there is no selection.')
-      return
-    }
-    const element = document.createElement('strong')
-    range.surroundContents(element)
-    setState({ ...state, is_bold: false })
-  }
-
-  const handleRemoveBold = () => {
-    // still need to adjust range at some point
-    const textarea = document.getElementById('textarea')
-    const selection = window.getSelection()
-    const node = Array.from(textarea.childNodes).find(node => node.textContent === selection.toString())
-    const text = node.previousSibling.textContent + selection.toString()
-    const textNode = document.createTextNode(text)
-
-    textarea.contains(node) 
-      ? textarea.replaceChild(textNode, node.previousSibling) 
-      : textarea.replaceChild(textNode, node.previousSibling)
-    
-    textarea.removeChild(node)
-    setState({ ...state, is_bold: true })
-    
-  }
-
   return (
     <form className={styles.input} 
       onSubmit={handleSubmit}
@@ -106,10 +74,7 @@ export default () => {
       </div>
       <div role="toolbar">
         <div>
-          {state.is_bold 
-            ? <BoldButtonCreate handleClick={handleCreateBold} />
-            : <BoldButtonRemove handleClick={handleRemoveBold} />
-          }
+          <BoldButton />
           <ItalicButton />
           <LinkButton />
         </div>
