@@ -8,23 +8,24 @@ export default () => {
     const range = selection.getRangeAt(0)
     const fragment = range.cloneContents()
     
-    console.log('here')
+    console.log('startOffset: ', range.startOffset)
+    console.log('endOffset: ', range.endOffset)
     
     if (!fragment.firstChild) {
-      console.log('should only see this if there is no selection.')
-      return
+      return console.log('should only see this if there is no selection.')
     }
     
     if (fragment.firstChild.nodeName !== 'STRONG') {
       const element = document.createElement('strong')
-      range.surroundContents(element)
-      return
+      return range.surroundContents(element)
     }
-    
+
     //=================================================
     // still need to adjust range at some point
     
     const node = Array.from(textarea.childNodes).find(node => node.textContent === selection.toString())
+    // theres a bug that cannot read .textContent when the first word is highlighted
+    // possibly due to the nested strong element bug
     const text = node.previousSibling.textContent + selection.toString()
     const textNode = document.createTextNode(text)
 
@@ -33,6 +34,9 @@ export default () => {
       : textarea.replaceChild(textNode, node.previousSibling)
     
     textarea.removeChild(node)
+    range.setStart(textarea, range.startOffset)
+    range.setEnd(textarea, range.endOffset)
+    
   }
 
   return (
