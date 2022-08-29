@@ -21,6 +21,8 @@ export default () => {
     }
 
     // still need to adjust range at some point:
+    // This seems to remove ALL elements from text.
+    // It must allow for presence of <em> elements
     const node = Array.from(textarea.childNodes).find(node => node.textContent === selection.toString())
     const text = `${node.previousSibling ? node.previousSibling.textContent : ''}${selection.toString()}`
     const textNode = document.createTextNode(text)
