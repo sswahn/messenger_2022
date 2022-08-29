@@ -10,7 +10,7 @@ export default () => {
     
     //console.log('startOffset: ', range.startOffset)
     //console.log('endOffset: ', range.endOffset)
-    //console.log('textarea: ', textarea)
+    console.log('textarea: ', textarea)
     
     console.log('range.closeset(strong):', range.startContainer.parentElement.closest('strong'))
     
@@ -20,8 +20,8 @@ export default () => {
     }
     
     if (fragment.firstChild.nodeName !== 'STRONG' && 
-      range.startContainer.parentElement.nodeName !== 'STRONG' &&
-      range.startContainer.parentElement.closest('strong') === null
+        range.startContainer.parentElement.nodeName !== 'STRONG' &&
+        range.startContainer.parentElement.closest('strong') === null
     ) {
       const element = document.createElement('strong')
       return range.surroundContents(element)
@@ -42,7 +42,6 @@ export default () => {
     
     //range.setStart(textarea, range.startOffset)
     //range.setEnd(textarea, range.endOffset)
-    
   }
 
   return (

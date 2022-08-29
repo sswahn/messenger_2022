@@ -11,7 +11,7 @@ export default () => {
     //console.log('startOffset: ', range.startOffset)
     //console.log('endOffset: ', range.endOffset)
     
-    //console.log('textarea: ', textarea)
+    console.log('textarea: ', textarea)
     
     console.log('range.closeset(strong):', range.startContainer.parentElement.closest('strong'))
     
@@ -20,7 +20,6 @@ export default () => {
     if (!fragment.firstChild) {
       return console.log('should only see this if there is no selection.')
     }
-    
 
     if (fragment.firstChild.nodeName !== 'EM' && 
         range.startContainer.parentElement.nodeName !== 'EM' &&
