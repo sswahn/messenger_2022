@@ -13,13 +13,16 @@ export default () => {
     
     console.log('textarea: ', textarea)
     
-    console.log('range.closeset(strong):', range.startContainer.parentElement.closest('strong'))
+    //console.log('range.closeset(em):', range.startContainer.parentElement.closest('em'))
     
     
     
     if (!fragment.firstChild) {
       return console.log('should only see this if there is no selection.')
     }
+    
+    // TODO: check if selection contains a childNode that is <em>.
+    //       if true then remove it and continue
 
     if (fragment.firstChild.nodeName !== 'EM' && 
         range.startContainer.parentElement.nodeName !== 'EM' &&
@@ -33,6 +36,9 @@ export default () => {
     const node = Array.from(textarea.childNodes).find(node => node.textContent === selection.toString())
     
     // Filter for <strong> here:
+    console.log('node: ', node)
+    
+    
     const text = `${node.previousSibling ? node.previousSibling.textContent : ''}${selection.toString()}`
     const textNode = document.createTextNode(text)
     

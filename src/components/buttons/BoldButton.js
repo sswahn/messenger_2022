@@ -12,12 +12,18 @@ export default () => {
     //console.log('endOffset: ', range.endOffset)
     console.log('textarea: ', textarea)
     
-    console.log('range.closeset(strong):', range.startContainer.parentElement.closest('strong'))
+    //console.log('range.closeset(strong):', range.startContainer.parentElement.closest('strong'))
     
     
     if (!fragment.firstChild) {
       return console.log('should only see this if there is no selection.')
     }
+    
+    
+    // TODO: check if selection contains a childNode that is <strong>.
+    //       if true then remove it and continue
+    //       (filter for <em> too)
+    
     
     if (fragment.firstChild.nodeName !== 'STRONG' && 
         range.startContainer.parentElement.nodeName !== 'STRONG' &&
@@ -29,11 +35,17 @@ export default () => {
 
     // Still need to adjust range at some point:
     const node = Array.from(textarea.childNodes).find(node => node.textContent === selection.toString())
-    
+
     // Filter for <em> here:
-    const text = `${node.previousSibling ? node.previousSibling.textContent : ''}${selection.toString()}`
-    const textNode = document.createTextNode(text)
+    // definitly will have to use an htmlCollection
+    // which will be a fragment appended to textarea
+    // unless you figure out how to remove directly from the selection
     
+    //This will prolly be removed:
+    const text = `${node.previousSibling ? node.previousSibling.textContent : ''}${selection.toString()}`
+    
+    
+    const textNode = document.createTextNode(text)
     node.previousSibling 
       ? textarea.replaceChild(textNode, node.previousSibling)
       : textarea.appendChild(textNode)
