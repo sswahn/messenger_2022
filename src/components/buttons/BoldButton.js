@@ -29,8 +29,8 @@ export default () => {
 
     textarea.replaceChild(textNode, node.previousSibling)
     textarea.removeChild(node)
-    range.setStart(textarea, range.startOffset)
-    range.setEnd(textarea, range.endOffset)
+    //range.setStart(textarea, range.startOffset)
+    //range.setEnd(textarea, range.endOffset)
     
   }
 
