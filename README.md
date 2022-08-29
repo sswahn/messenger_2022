@@ -1,2 +1,2 @@
-# game_site_v2
+# Messenger Clone
 Created with CodeSandbox
