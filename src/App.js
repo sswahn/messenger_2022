@@ -1,6 +1,7 @@
 import Provider from './Provider'
 import Modal from './Modal'
 import Main from './components/main/Main'
+import ErrorHandling from './ErrorHandling'
 import "./index.css"
 
 /**
@@ -11,10 +12,14 @@ import "./index.css"
  * title/description/image/video/favicon from links
  * (this is serverside issue)
  * 
+ * ErrorHandling needs work
+ * 
  */
 
 export default () => 
-  <Provider>
-    <Modal />
-    <Main />
-  </Provider>
+  <ErrorHandling>
+    <Provider>
+        <Modal />
+        <Main />
+    </Provider>
+  </ErrorHandling>
