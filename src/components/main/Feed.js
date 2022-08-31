@@ -45,7 +45,10 @@ export default () => {
       {state.data.length ? state.data.map(item => 
         <article id={item.id} key={item.id}>
           <header>
-            <img src="" alt="" />
+            {item.image 
+              ? <img src="" alt={`${item.user}'s avatar`} />
+              : <i className="fa fa-user"></i>
+            }
             <button rel="author">{item.user}</button>
             <time dateTime="">{item.date}</time>
           </header>
